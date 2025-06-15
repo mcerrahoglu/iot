@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IoT Quiz Uygulaması</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .quiz-nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+        }
+
+        .quiz-section {
+            display: none;
+            padding: 30px;
+        }
+
+        .quiz-section.active {
+            display: block;
+        }
+
+        /* Çoktan Seçmeli Sorular */
+        .question-container {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-left: 5px solid #667eea;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .question-text {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+
+        .options {
+            display: grid;
+            gap: 12px;
+        }
+
+        .option {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+
+        .option:hover {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+
+        .option.selected {
+            border-color: #667eea;
+            background: #e3f2fd;
+        }
+
+        .option.correct {
+            background: #d4edda !important;
+            border-color: #28a745 !important;
+            color: #155724;
+        }
+
+        .option.incorrect {
+            background: #f8d7da !important;
+            border-color: #dc3545 !important;
+            color: #721c24;
+        }
+
+        /* Boşluk Doldurma */
+        .word-bank {
+            background: #e3f2fd;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 2px solid #2196f3;
+        }
+
+        .word-bank h3 {
+            color: #1976d2;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .words {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .word {
+            background: white;
+            border: 2px solid #2196f3;
+            border-radius: 20px;
+            padding: 8px 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            color: #1976d2;
+        }
+
+        .word:hover {
+            background: #2196f3;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .fill-blank-question {
+            background: #fff3e0;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid #ff9800;
+        }
+
+        .blank-input {
+            border: none;
+            border-bottom: 3px solid #ff9800;
+            background: transparent;
+            padding: 5px 10px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #e65100;
+            min-width: 150px;
+            margin: 0 5px;
+        }
+
+        .blank-input:focus {
+            outline: none;
+            border-bottom-color: #ff5722;
+        }
+
+        .blank-input.correct {
+            background: #c8e6c9 !important;
+            border-bottom-color: #4caf50 !important;
+            color: #2e7d32 !important;
+        }
+
+        .blank-input.incorrect {
+            background: #ffcdd2 !important;
+            border-bottom-color: #f44336 !important;
+            color: #c62828 !important;
+        }
+
+        /* Kontrol Butonları */
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #4caf50, #45a049);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .btn-check {
+            background: linear-gradient(135deg, #ff9800, #f57c00);
+        }
+
+        .btn-next {
+            background: linear-gradient(135deg, #2196f3, #1976d2);
+        }
+
+        .btn-prev {
+            background: linear-gradient(135deg, #9c27b0, #7b1fa2);
+        }
+
+        .progress {
+            background: #e9ecef;
+            height: 8px;
+            border-radius: 4px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background: linear-gradient(135deg, #4caf50, #45a049);
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+
+        .score {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .quiz-nav {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .words {
+                justify-content: flex-start;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌐 IoT Quiz Uygulaması</h1>
+            <p>Bilginizi test edin ve öğrenin!</p>
+        </div>
+
+        <div class="quiz-nav">
+            <button class="nav-btn active" onclick="showSection('multiple-choice')">Çoktan Seçmeli</button>
+            <button class="nav-btn" onclick="showSection('fill-blank')">Boşluk Doldurma</button>
+        </div>
+
+        <!-- Çoktan Seçmeli Sorular -->
+        <div id="multiple-choice" class="quiz-section active">
+            <div class="score">
+                <span id="mc-score">Soru: <span id="current-mc">1</span> / <span id="total-mc">51</span></span>
+            </div>
+            <div class="progress">
+                <div class="progress-bar" id="mc-progress" style="width: 0%"></div>
+            </div>
+            
+            <div id="mc-question-container"></div>
+            
+            <div class="controls">
+                <button class="btn btn-prev" onclick="prevMCQuestion()" id="prev-mc-btn">⬅ Önceki</button>
+                <button class="btn btn-check" onclick="checkMCAnswer()" id="check-mc-btn">Kontrol Et</button>
+                <button class="btn btn-next" onclick="nextMCQuestion()" id="next-mc-btn">Sonraki ➡</button>
+            </div>
+        </div>
+
+        <!-- Boşluk Doldurma -->
+        <div id="fill-blank" class="quiz-section">
+            <div class="word-bank">
+                <h3>📝 Kelime Bankası</h3>
+                <div class="words" id="word-bank"></div>
+            </div>
+
+            <div id="fb-questions-container"></div>
+            
+            <div class="controls">
+                <button class="btn btn-check" onclick="checkFillBlank()">Cevapları Kontrol Et</button>
+                <button class="btn" onclick="resetFillBlank()">Sıfırla</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Çoktan seçmeli sorular
+const mcQuestions = [
+    {
+        question: "1)IOT'yi sürükleyen teknoloji ve piyasa temelleri ile ilgili aşağıdakilerden hangisi yanlıştır? mümkün kılıyor. gücü sağlamaya devam ediyor.",
+        options: ["IP temelli ağ bağlantıları egemen küresel standart halini alıyor", "Her tarafa yayılan ağ bağlantıları her nesneyi bağlantılı hale getiriyor", "Bilgi teknolojisi ve operasyonel teknolojilerin ayrışması IoT konseptini", "Moore yasası düşük maliyet ve düşük güç tüketimi ile daha büyük hesaplama"],
+        correct: 2
+    },
+    {
+        question: "2)Aşağıdakilerden hangisi sensor aygıtlarından alınan verilerin büyük veri merkezlerinde işlenmesini ifade eden kavramdır?",
+        options: ["Fog Computing", "Edge Computing", "Cloud Computing", "Real-time Computing"],
+        correct: 2
+    },
+    {
+        question: "3)Kontrol mekanizmaları karşılaştırıldığında aşağıdakilerden hangisi doğrudur?",
+        options: ["İleri besleme kontrol, kapalı çevrim kadar reaktiftir.", "Geri besleme kontrol, basit tasarıma sahiptir ve daha az bakım gerektirir.", "Açık çevrim kontrolün doğruluk ve güvenilirlik hassasiyeti, ileri besleme kontrole göre daha yüksektir.", "İleri besleme kontrol proaktiftir ve ölçüm değişkenindeki değişiklikleri öngörebilme kabiliyetine sahiptir."],
+        correct: 3
+    },
+    {
+        question: "4)Aşağıdaki modelleme yaklaşımlarından hangisinde veri akış diyagramları kullanılır?",
+        options: ["Behavioral Modeling", "Functional Modeling", "Structural Modeling", "Procedural Modeling"],
+        correct: 1
+    },
+    {
+        question: "5)Gömülü sistem tasarım tercihlerini etkileyen gerklilikler ile ilgili aşağıdakilerden hangisi yanlıştır?",
+        options: ["Düşük güç tüketimi gömülü sistemler için tercih edilen bir özelliktir", "Karmaşık kullanıcı arayüzüne sahip sistemlerde mikroişlemciler veya çip üzerinde sistemler tercih edilir", "Az sayıda üretilecek sistemler için özel amaçlı ve sabit donanımlı entegre devreler tercih edilir", "Sistem hafıza gereksinimleri ana işlemci seçimini de etkileyebilir"],
+        correct: 2
+    },
+    {
+        question: "6)Aşağıdakilerden hangisi bir sistemin artan boyut ve iş yükü durumunda bile verimli bir şekilde çalışmaya devam edebilme yeteneğidir?",
+        options: ["Scalability", "Availability", "Composibility", "Reconfigurability"],
+        correct: 0
+    },
+    {
+        question: "7)Görevler için tanımlı son gerçekleştirme zamanlarının karşılanması noktasında en esnek olan gerçek zamanlı sistem tipi aşağıdakilerden hangisidir?",
+        options: ["Firm real-time", "Soft real-time", "Exact real-time", "Hard real-time"],
+        correct: 1
+    },
+    {
+        question: "8)Seçeneklerde IEEE standartları ile temsil edilen kablosuz ağların kapsama alanları bakımından büyükten küçüğe doğru sıralanışı aşağıdakilerden hangisidir?",
+        options: ["802.20 > 802.16 > 802.11 > 802.15", "802.20 > 802.16 > 802.15 > 802.11", "802.11 > 802.15 > 802.16 > 802.20", "802.16 > 802.11 > 802.20 > 802.15"],
+        correct: 0
+    },
+    {
+        question: "9) > sembolünün  üst kümesidir anlamına geldiğini farzederseniz aşağıdakilerden hangisi doğrudur?",
+        options: ["CPS > ECS > IoT", "CPS > IoT > ECS", "IoT > ECS > CPS", "ECS > IoT > CPS", "IoT > CPS > ECS"],
+        correct: 1
+    },
+    {
+        question: "10) Akıllı elektrik şebekeleri, enerji üretim ve dağıtım tesisleri, mikro ve makro düzeyde enerji yönetim tesisleri vb. bileşenleri entegre eden büyük ölçekli sistem aşağıdaki kavramlardan hangisi ile ifade edilir?",
+        options: ["Smart Factory", "Smart Higway", "Smart Grid", "RFID System"],
+        correct: 2
+    },
+    {
+        question: "11)Aşağıdakilerden hangisi sensor aygıtlarından alınan verilerin ağ uç birimlerinde işlenmesini ifade eden bir kavramdır?",
+        options: ["Edge Computing", "Cloud Computing", "Real-time Computing", "Fog Computing", "Scientific Computing"],
+        correct: 0
+    },
+    {
+        question: "12)Aşağıdakilerden hangisi bir sistemin, herhangi bir zamanda sistem durum ve davranışını gerek nitel gerekse nicel olarak tahmin edebilme özelliğidir?",
+        options: ["Compositionality", "Availability", "Integrity", "Predictability", "Composability"],
+        correct: 3
+    },
+    {
+        question: "13)IoT sistemlerde kullanılması muhtemel iki farklı kontrol mekanizması aşağıdakilerden hangisidir?",
+        options: ["İleri besleme ve Açık çevrim", "Açık çevrim ve kapalı çevrim", "Kapalı çevrim ve ileri besleme", "Kapalı çevrim ve geri besleme", "Geri besleme ve Açık çevrim"],
+        correct: 1
+    },
+    {
+        question: "14) Aşağıdakilerden hangisi Ardunio devre kartının seri iletişim yolu üzerinden programlanabilmesi için kullanılan bir bayrak(flag) değişkenidir?",
+        options: ["Setup USB", "Serial Event Run", "Ardunio Run", "Serial Monitor"],
+        correct: 1
+    },
+    {
+        question: "15)Aşağıdakilerden hangisi geçerli bir sonsuz döngü ifadesi değildir?",
+        options: ["do {} while (1):", "for (::) {}", "for (1) {}", "while (1) {}"],
+        correct: 2
+    },
+    {
+        question: "16) Ardunio Mega içinde yer alan AVR mikrodenetleyicisi kaç bittir?",
+        options: ["4 BİT", "8 BİT", "16 BİT", "32 BİT"],
+        correct: 1
+    },
+    {
+        question: "17)Aşağıdakilerden hangisi bir fiziksel etki/olguyu analog elektriksel sinyale dönüştüren araçtır?",
+        options: ["ADC", "Sensor", "DAC", "Actuator", "Converter"],
+        correct: 1
+    },
+    {
+        question: "18)avr-libc çapraz geliştirme sürecinin hangi aşamasında kullanılır?",
+        options: ["convert", "link", "compile", "upload", "assemble"],
+        correct: 2
+    },
+    {
+        question: "19) Aşağıdakilerden hangisi IoT kavramına benzer bir konsept değildir?",
+        options: ["Virtual Reality", "Ambient İnteligence", "Cyber Physical System", "Ubiqultous Computing", "System of System"],
+        correct: 0
+    },
+    {
+        question: "20)Bir aygıt/sistem tarafından çıktı olan ürünün kullanıcının ihtiyaçlarına cevap verme noktasında yapması gereken işi doğru yapıp yapmadığını test edilmesi hangi kavram ile ifade edilir?",
+        options: ["Validation", "Computotion", "Verifaction", "Simulation", "Emulation"],
+        correct: 0
+    },
+    {
+        question: "21)Aşağıdakilerden hangisi ELF formatındaki program kodunu, AVR mikrodenetleyiciler tarafından çalıştınlacak Intel HEX formatına dönüştüren bir çapraz geliştirme yazılım aracıdır?",
+        options: ["avr-as", "avr-gcc", "avrdude", "avr-objcopy", "avr-bootloader"],
+        correct: 3
+    },
+    {
+        question: "22)C programı inşasında assemble aşaması sonucu oluşan dosya hangi uzantıya sahiptir?",
+        options: [".exe", ".o", ".c", ".s", "i"],
+        correct: 1
+    },
+    {
+        question: "23)Bir aygıt veya sistem tasarımında çıktı olan ürünün tasarım başlangıcında belirlenen teknik özelliklere uyup uymadığının doğrulanması hangi kavram ile ifade edilir?",
+        options: ["Verification", "Validation", "Simulation", "Emulation", "Computation"],
+        correct: 0
+    },
+    {
+        question: "24)Aşağıdakilerden hangisi bir sistemin ihtiyaca binaen hızlı ve effektif bir şekilde yeniden yapılandırılabilme özelliğidir?",
+        options: ["Robustness", "Availability", "Reconfigurability", "Integrity", "Composability"],
+        correct: 2
+    },
+    {
+        question: "25)Aşağıdakilerden hangisi bir sistemin herhangi bir aksaklık, arıza, hata vb. beklenmedik durumda bile erişime hazır olabilme özelliğidir?",
+        options: ["Compositionality", "Predictability", "Availability", "Adaptability", "Reliability"],
+        correct: 2
+    },
+    {
+        question: "26)Aşağıdakilerden hangisi bir sistemin ölçülen çıktısının olması gereken çıktıya yakınlığını ifade eder?",
+        options: ["Safety", "Reconfigurability", "Accuracy", "Availability", "Confidentiality"],
+        correct: 2
+    },
+    {
+        question: "+27)Avrdude programı opsiyonlarından hangisi mikrodenetleyici modelini belirtmek için kullanılır?",
+        options: ["-m", "-b", "-U", "-c", "-p"],
+        correct: 4
+    },
+    {
+        question: "28) AVR mikrodenetleyici yazılım geliştirme sürecinde, kaynak kodunun assembly diline çevrilmesi hangi aşamada yapılır?",
+        options: ["Convert", "Link", "Compile", "Upload", "Assemble"],
+        correct: 4
+    },
+    {
+        question: "29) AVR mikrodenetleyicilerine yazılım yükleme sürecinde hangi aşama kullanılır?",
+        options: ["Convert", "Link", "Compile", "Upload", "Assemble"],
+        correct: 3
+    },
+    {
+        question: "30) AVR mikrodenetleyici geliştirme sürecinde, tüm nesne dosyalarının birleştirilerek tek bir çalıştırılabilir dosya oluşturulması işlemi hangi aşamada yapılır?",
+        options: ["Convert", "Link", "Compile", "Upload", "Assemble"],
+        correct: 1
+    },
+    {
+        question: "31) AVR mikrodenetleyici yazılım geliştirme sürecinde, kaynak kodunun makine diline çevrilmesi işlemi hangi aşamada yapılır?",
+        options: ["Convert", "Link", "Compile", "Upload", "Assemble"],
+        correct: 2
+    },
+    {
+        question: "32)Aşağıdakilerden hangisi, karmaşık hesaplamalar, matematiksel modelleme ve simülasyonlar için yüksek performanslı hesaplama kaynaklarını kullanan bir kavramdır?",
+        options: ["Fog Computing", "Edge Computing", "Cloud Computing", "Scientific Computing", "Real-time Computing"],
+        correct: 3
+    },
+    {
+        question: "33)Aşağıdakilerden hangisi, veri işleme ve analizinin hem uç cihazlarda hem de ağın merkezi bölgelerinde, yani uç birimler ile bulut arasında bir katman kullanılarak gerçekleştirildiği bir kavramdır?",
+        options: ["Edge Computing", "Cloud Computing", "Real-time Computing", "Fog Computing", "Scientific Computing"],
+        correct: 3
+    },
+    {
+        question: "34)Aşağıdaki modelleme yaklaşımlarından hangisi algoritmaların adım adım yürütülmesini ve işlemlerin sırasını tanımlamak amacıyla kullanılır?",
+        options: ["Functional Modeling", "Structural Modeling", "Behavioral Modeling", "Procedural Modeling"],
+        correct: 3
+    },
+    {
+        question: "35)Aşağıdaki modelleme yaklaşımlarından hangisi sistemin bileşenlerini, sınıflarını ve bunlar arasındaki ilişkileri tanımlamak için kullanılır?",
+        options: ["Behavioral Modeling", "Functional Modeling", "Structural Modeling", "Procedural Modeling"],
+        correct: 2
+    },
+    {
+        question: "36)Aşağıdaki modelleme yaklaşımlarından hangisinde durum diyagramları kullanılır?",
+        options: ["Structural Modeling", "Functional Modeling", "Behavioral Modeling", "Procedural Modeling"],
+        correct: 2
+    },
+    {
+        question: "37)Aşağıdakilerden hangisi IoT kavramına benzer bir konsept değildir?",
+        options: ["Virtual Reality", "Ambient İnteligence", "Cyber Physical System", "Ubiqultous Computing", "System of System"],
+        correct: 0
+    },
+    {
+        question: "38)avr-libc çapraz geliştirme sürecinin hangi aşamasında kullanılır?",
+        options: ["convert", "link", "compile", "upload", "assemble"],
+        correct: 1
+    },
+    {
+        question: "39)Aşağıdakilerden hangisi C diliyle yazılmış kaynak kodları AVR mikrodenetleyiciler için makine diline çevirerek derleyen bir çapraz geliştirme yazılım aracıdır?",
+        options: ["avr-bootloader", "avr-objcopy", "avrdude", "avr-gcc", "avr-as"],
+        correct: 3
+    },
+    {
+        question: "40) Aşağıdakilerden hangisi AVR mikrodenetleyicilerde, programın bilgisayardan doğrudan mikrodenetleyiciye yüklenmesini sağlayan ve yazılım güncellemelerini kolaylaştıran bir başlatıcı programıdır?",
+        options: ["avr-gcc", "avr-as", "avrdude", "avr-objcopy", "avr-bootloader"],
+        correct: 4
+    },
+    {
+        question: "41)Aşağıdakilerden hangisi AVR mikrodenetleyiciler için oluşturulmuş HEX formatındaki program kodunu mikrodenetleyicinin Flash hafızasına aktarmak için kullanılan bir çapraz geliştirme yazılım aracıdır?",
+        options: ["avr-as", "avr-gcc", "avrdude", "avr-objcopy", "avr-bootloader"],
+        correct: 2
+    },
+    {
+        question: "42) Görevin zamanında tamamlanması durumunda maksimum fayda sağladığı, ancak gecikme durumunda sistemin tamamen zarar gördüğü sistem tipi aşağıdakilerden hangisidir?",
+        options: ["Hard real-time", "Soft real-time", "Firm real-time", "Exact real-time"],
+        correct: 0
+    },
+    {
+        question: "43)Gerçek zamanlı sistemlerde, son gerçekleştirme zamanının nadiren kaçırılmasının kabul edilebilir olduğu ancak görevin değersiz sayılmadığı sistem tipi aşağıdakilerden hangisidir?",
+        options: ["Soft real-time", "Firm real-time", "Exact real-time", "Hard real-time"],
+        correct: 1
+    },
+    {
+        question: "44) Aşağıdakilerden hangisi bir analog elektriksel sinyali dijital elektriksel sinyale dönüştüren araçtır?",
+        options: ["Sensor", "Actuator", "ADC", "DAC", "Transducer"],
+        correct: 2
+    },
+    {
+        question: "45)Üzerinde çalıştığı makine için değil de başka bir makine için kod derleyen tercüman yazılıma ne ad verilir?",
+        options: ["Interpreter", "Compiler", "JIT Compiler", "Assembler", "Cross Compiler"],
+        correct: 4
+    },
+    {
+        question: "46)Derste uygulamasını gerçekleştirdiğimiz Arduino Web Server için oluşturulan C++ program koduna Arduino.h ile beraber hangı başlık dosyalarının eklenmesi gerekir?",
+        options: ["SPL.h ve PN532.h", "USB.h ve Ethernet.h", "USB.h ve Wi-Fi.h", "SPh ve Wi-Fi.h", "SPh ve Ethernet.h"],
+        correct: 4
+    },
+    {
+        question: "47)Avrdude ile Arduino board arasındaki seri iletişim hızı hangi opsiyon ile belirtilir?",
+        options: ["-b", "-v", "-P", "-U", "-C"],
+        correct: 0
+    },
+    {
+        question: "48)Endüstri 4.0 kavramı aşağıdakilerden hangisini ifade etmek için kullanılır?",
+        options: ["Gelecek Nesil Üretim Sistemleri", "Gelecek Nesil Güvenlik Sistemleri", "Gelecek Nesil Taşımacılık Sistemleri", "Gelecek Nesil Acil Durum Yönetim Sistemleri"],
+        correct: 0
+    },
+    {
+        question: "49)Aşağıdakilerden hangisi gömülü sistemlerin en temel bileşenleri arasında yer almaz?",
+        options: ["ADC", "CPU", "Monitor", "Memory"],
+        correct: 2
+    },
+    {
+        question: "50)Aşağıdaki hafıza tiplerinden hangisi Arduino devre kartlarında yaygın olarak program hafızası için tercih edilir?",
+        options: ["DRAM", "Flash", "SRAM", "EEPROM"],
+        correct: 1
+    },
+    {
+        question: "51)< sembolünün  alt kümesidir anlamına geldiğini farzederseniz aşağıdakilerden hangisi doğrudur?",
+        options: ["CPS > ECS > IoT", "CPS > IoT > ECS", "IoT > ECS > CPS", "ECS > IoT > CPS", "IoT > CPS > ECS"],
+        correct: 3
+    },
+];
+
+
+        // Boşluk doldurma soruları
+        const fillBlankWords = [
+            "ADC", "DAC", "Sensor", "Actuator", "Transducer", "Converter", "Port", "SPI", 
+            "Digital Write", "DDR", "Pin Mode", "Cross Compiler", "Bootloader", "avr-objcopy", 
+            "avrdude", "obj-converter", "interpreter", "avr gcc", "avr libc", "assembler", "native compiler"
+        ];
+
+
+        const fillBlankQuestions = [
+    {
+        question: "\"_____\"bir analog elektriksel sinyali dijital elektriksel sinyale dönüştüren araçtır?",
+        answer: "ADC"
+    },
+    {
+        question: "\"_____\"bir analog elektriksel sinyali fiziksel etki/eyleme dönüştüren araçtır?",
+        answer: "Actuator"
+    },
+    {
+        question: "\"_____\"bir enerji formundan başka bir enerji formuna dönüşüm yapan araçları ifade eder?",
+        answer: "Transducer"
+    },
+    {
+        question: "\"_____\"bir fiziksel etki/olguyu analog elektriksel sinyale dönüştüren araçtır",
+        answer: "Sensor"
+    },
+    {
+        question: "\"_____\"bir dijital sinyali analog sinyale çeviren araçtır",
+        answer: "DAC"
+    },
+    {
+        question: "\"_____\"dijital sinyali analog sinyale, analog sinyali dijital sinyale dönüştürür",
+        answer: "Converter"
+    },
+    {
+        question: "\"_____\"AVR programlama mantığı ile giriş /çıkış yönü atanmış bir pine değer atamak için kullanılır.",
+        answer: "PORT"
+    },
+    {
+        question: "\"_____\"Arduino Mega üzerine yerleşen devre kartı. (shield) ile Arduino Maga devre kartı arasındaki bağlantıyı sağlamak için kullanılır",
+        answer: "SPI"
+    },
+    {
+        question: "\"_____\"Arduino programlama mantığı ile giriş /çıkış yönü atanmış bir pine deger atamak için kullanılır.",
+        answer: "Digital Write"
+    },
+    {
+        question: "\"_____\"AVR programlama mantığı ile bir pine giriş/çıkış yönü atamak için kullanılır.",
+        answer: "DDR"
+    },
+    {
+        question: "\"_____\"Arduino programlama mantığı ile bir pine giriş /çılış yönü atamak için kullanılır.",
+        answer: "Pin Mode"
+    },
+    {
+        question: "\"_____\"Üzerinde çalıştığı makine için değil de başka bir makine için kod derleyen tercüman yazılıma denir",
+        answer: "Cross Compiler"
+    },
+    {
+        question: "\"_____\"AVR mikrodenetleyicilerin Flash hafızasına yüklenmiş program kodunun başlatılması için kullanılır.",
+        answer: "Bootloader"
+    },
+    {
+        question: "\"_____\"ELF formatındaki program kodunu, AVR mikrodenetleyiciler tarafından çalıştırılacak Intel HEX formatına dönüştürmek için kullanılır.",
+        answer: "avr-objcopy"
+    },
+    {
+        question: "\"_____\".hex uzantılı çalıştırılabilir program kodunu mikrodenetleyicinin Flash hafızasına transfer ekmek için kullanılan açık kaynak bir çapraz geliştirme yazılımıdır.",
+        answer: "avrdude"
+    },
+    {
+        question: "\"_____\"Elf formatındaki dosyayı, AVR mikrodenetleyiciler tarafından anlaşılacak HEX formatına çevirmek için kullanılır.",
+        answer: "obj-converter"
+    },
+    {
+        question: "\"_____\"Kodu derlemek yerine satır satır çalıştıran yapıdır.",
+        answer: "interpreter"
+    },
+    {
+        question: "\"_____\"AVR mikrodenetleyiciler için geliştirilmiş bir standart C kütüphanesidir. ",
+        answer: "avr libc"
+    },
+    {
+        question: "\"_____\"ELF formatında çalıştırılabilir program kodu üretir.",
+        answer: "avr-gcc"
+    },
+    {
+        question: "\"_____\"assembly diliyle yazılmış olan programları makine diline (binary/makine kodu) çeviren bir yazılımdır.",
+        answer: "Assembler"
+    },
+    {
+        question: "\"_____\"bir programlama dilinde yazılmış kaynak kodu, aynı sistem mimarisi (işlemci türü ve işletim sistemi) için doğrudan çalıştırılabilir makine koduna çeviren derleyicidir.",
+        answer: "Native Compiler"
+    },
+];
+
+
+        let currentMCQuestion = 0;
+let mcAnswers = [];
+let shuffledMCQuestions = [];
+let shuffledFillBlankQuestions = [];
+let selectedWord = null;
+
+document.addEventListener('DOMContentLoaded', function() {
+    shuffledMCQuestions = [...mcQuestions].sort(() => Math.random() - 0.5);
+    shuffledFillBlankQuestions = [...fillBlankQuestions].sort(() => Math.random() - 0.5);
+    
+    initializeMC();
+    initializeFillBlank();
+});
+
+function showSection(section) {
+    document.querySelectorAll('.quiz-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    
+    document.getElementById(section).classList.add('active');
+    event.target.classList.add('active');
+}
+
+// Çoktan Seçmeli Fonksiyonlar
+function initializeMC() {
+    document.getElementById('total-mc').textContent = shuffledMCQuestions.length;
+    mcAnswers = new Array(shuffledMCQuestions.length).fill(null);
+    displayMCQuestion();
+}
+
+function displayMCQuestion() {
+    const question = shuffledMCQuestions[currentMCQuestion];
+    const container = document.getElementById('mc-question-container');
+    
+    const shuffledOptions = [...question.options].map((option, index) => ({option, originalIndex: index}));
+    
+    // Seçenekleri karıştır
+    for (let i = shuffledOptions.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffledOptions[i], shuffledOptions[j]] = [shuffledOptions[j], shuffledOptions[i]];
+    }
+    
+    container.innerHTML = `
+        <div class="question-container">
+            <div class="question-text">${currentMCQuestion + 1}. ${question.question}</div>
+            <div class="options">
+                ${shuffledOptions.map((item, index) => `
+                    <div class="option" onclick="selectMCOption(${index}, ${item.originalIndex})" data-index="${index}">
+                        ${String.fromCharCode(65 + index)}) ${item.option}
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+    `;
+
+    // Önceki cevabı göster
+    if (mcAnswers[currentMCQuestion] !== null) {
+        const selectedOption = container.querySelector(`[data-index="${mcAnswers[currentMCQuestion].selectedIndex}"]`);
+        if (selectedOption) selectedOption.classList.add('selected');
+    }
+
+    updateMCProgress();
+    updateMCButtons();
+}
+
+function selectMCOption(displayIndex, originalIndex) {
+    document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+    document.querySelector(`[data-index="${displayIndex}"]`).classList.add('selected');
+    
+    mcAnswers[currentMCQuestion] = {
+        selectedIndex: displayIndex,
+        originalIndex: originalIndex
+    };
+}
+
+function checkMCAnswer() {
+    if (mcAnswers[currentMCQuestion] === null) {
+        alert('Lütfen bir seçenek seçin!');
+        return;
+    }
+
+    const question = shuffledMCQuestions[currentMCQuestion];
+    const userAnswer = mcAnswers[currentMCQuestion];
+    const options = document.querySelectorAll('.option');
+    
+    options.forEach((option, index) => {
+        option.style.pointerEvents = 'none';
+        // originalIndex'ü almak için onclick stringinden çıkartmak yerine data attribute kullanılabilir ama şimdilik:
+        const onclickText = option.getAttribute('onclick');
+        const originalIndexMatch = onclickText.match(/selectMCOption\(\d+, (\d+)\)/);
+        const originalIndex = originalIndexMatch ? parseInt(originalIndexMatch[1]) : -1;
+        
+        if (originalIndex === question.correct) {
+            option.classList.add('correct');
+        } else if (index === userAnswer.selectedIndex && originalIndex !== question.correct) {
+            option.classList.add('incorrect');
+        }
+    });
+
+    document.getElementById('check-mc-btn').style.display = 'none';
+}
+
+function nextMCQuestion() {
+    if (currentMCQuestion < shuffledMCQuestions.length - 1) {
+        currentMCQuestion++;
+        displayMCQuestion();
+    }
+}
+
+function prevMCQuestion() {
+    if (currentMCQuestion > 0) {
+        currentMCQuestion--;
+        displayMCQuestion();
+    }
+}
+
+function updateMCProgress() {
+    document.getElementById('current-mc').textContent = currentMCQuestion + 1;
+    const progress = (currentMCQuestion / shuffledMCQuestions.length) * 100;
+    document.getElementById('mc-progress').style.width = progress + '%';
+}
+
+function updateMCButtons() {
+    document.getElementById('prev-mc-btn').style.display = currentMCQuestion === 0 ? 'none' : 'inline-block';
+    document.getElementById('next-mc-btn').style.display = currentMCQuestion === shuffledMCQuestions.length - 1 ? 'none' : 'inline-block';
+    document.getElementById('check-mc-btn').style.display = 'inline-block';
+}
+
+// Boşluk Doldurma Fonksiyonlar
+function initializeFillBlank() {
+    const wordBank = document.getElementById('word-bank');
+    const shuffledWords = [...fillBlankWords].sort(() => Math.random() - 0.5);
+    
+    wordBank.innerHTML = shuffledWords.map(word => 
+        `<span class="word" onclick="selectWord('${word}')">${word}</span>`
+    ).join('');
+
+    const container = document.getElementById('fb-questions-container');
+    container.innerHTML = shuffledFillBlankQuestions.map((q, index) => `
+        <div class="fill-blank-question">
+            <strong>${index + 1}.</strong> ${q.question.replace('_____', `<input type="text" class="blank-input" data-answer="${q.answer}" data-index="${index}" readonly onclick="focusInput(this)" ondblclick="clearInput(this)">`)}
+            <span class="clear-hint" style="font-size: 12px; color: #666; margin-left: 10px;">(Silmek için çift tıklayın)</span>
+        </div>
+    `).join('');
+}
+
+// Yeni: Cevap silme fonksiyonu
+function clearInput(input) {
+    if (input.value.trim() !== '') {
+        const word = input.value.trim();
+        input.value = '';
+        input.classList.remove('correct', 'incorrect');
+        
+        // Kelimeyi bankaya geri ekle
+        const wordElement = document.querySelector(`[onclick="selectWord('${word}')"]`);
+        if (wordElement) {
+            wordElement.style.display = 'inline-block';
+            wordElement.style.background = 'white';
+            wordElement.style.color = '#1976d2';
+        }
+    }
+}
+
+function selectWord(word) {
+    if (selectedWord) {
+        const prevWordElem = document.querySelector(`[onclick="selectWord('${selectedWord}')"]`);
+        if (prevWordElem) {
+            prevWordElem.style.background = 'white';
+            prevWordElem.style.color = '#1976d2';
+        }
+    }
+    selectedWord = word;
+    const wordElem = document.querySelector(`[onclick="selectWord('${word}')"]`);
+    if (wordElem) {
+        wordElem.style.background = '#4caf50';
+        wordElem.style.color = 'white';
+    }
+}
+
+function focusInput(input) {
+    if (selectedWord) {
+        // Eğer input'ta değer varsa, onu önce bankaya geri koy
+        if (input.value.trim() !== '') {
+            const oldWord = input.value.trim();
+            const oldWordElem = document.querySelector(`[onclick="selectWord('${oldWord}')"]`);
+            if (oldWordElem) {
+                oldWordElem.style.display = 'inline-block';
+                oldWordElem.style.background = 'white';
+                oldWordElem.style.color = '#1976d2';
+            }
+        }
+
+        input.value = selectedWord;
+        // Kelimeyi bankadan gizle
+        const selectedWordElem = document.querySelector(`[onclick="selectWord('${selectedWord}')"]`);
+        if (selectedWordElem) selectedWordElem.style.display = 'none';
+
+        selectedWord = null;
+    }
+}
+
+function checkFillBlank() {
+    const inputs = document.querySelectorAll('.blank-input');
+    inputs.forEach(input => {
+        const userAnswer = input.value.trim();
+        const correctAnswer = input.dataset.answer;
+        
+        if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+            input.classList.add('correct');
+            input.classList.remove('incorrect');
+        } else {
+            input.classList.add('incorrect');
+            input.classList.remove('correct');
+        }
+    });
+}
+
+function resetFillBlank() {
+    document.querySelectorAll('.blank-input').forEach(input => {
+        input.value = '';
+        input.classList.remove('correct', 'incorrect');
+    });
+    
+    document.querySelectorAll('.word').forEach(word => {
+        word.style.display = 'inline-block';
+        word.style.background = 'white';
+        word.style.color = '#1976d2';
+    });
+    
+    selectedWord = null;
+}
+
+    </script>
+</body>
+</html>
+
