@@ -433,7 +433,7 @@ const mcQuestions = [
         correct: 1
     },
     {
-        question: " avr-libc çapraz geliştirme sürecinin hangi aşamasında kullanılır?",
+        question: " avr-libc çapraz geliştirme sürecinin ilk hangi aşamasında kullanılır?",
         options: ["convert", "link", "compile", "upload", "assemble"],
         correct: 2
     },
@@ -528,11 +528,6 @@ const mcQuestions = [
         correct: 0
     },
     {
-        question: " avr-libc çapraz geliştirme sürecinin hangi aşamasında kullanılır?",
-        options: ["convert", "link", "compile", "upload", "assemble"],
-        correct: 1
-    },
-    {
         question: " Aşağıdakilerden hangisi C diliyle yazılmış kaynak kodları AVR mikrodenetleyiciler için makine diline çevirerek derleyen bir çapraz geliştirme yazılım aracıdır?",
         options: ["avr-bootloader", "avr-objcopy", "avrdude", "avr-gcc", "avr-as"],
         correct: 3
@@ -619,7 +614,7 @@ const mcQuestions = [
         const fillBlankWords = [
             "ADC", "DAC", "Sensor", "Actuator", "Transducer", "Converter", "Port", "SPI", 
             "Digital Write", "DDR", "Pin Mode", "Cross Compiler", "Bootloader", "avr-objcopy", 
-            "avrdude", "obj-converter", "interpreter", "avr gcc", "avr libc", "assembler", "native compiler", "init()", "setup()"
+            "avrdude", "interpreter", "avr libc", "assembler", "native compiler", "init()", "setup()"
         ];
 
 
@@ -689,20 +684,12 @@ const mcQuestions = [
         answer: "avrdude"
     },
     {
-        question: "\"_____\"Elf formatındaki dosyayı, AVR mikrodenetleyiciler tarafından anlaşılacak HEX formatına çevirmek için kullanılır.",
-        answer: "obj-converter"
-    },
-    {
         question: "\"_____\"Kodu derlemek yerine satır satır çalıştıran yapıdır.",
         answer: "interpreter"
     },
     {
         question: "\"_____\"AVR mikrodenetleyiciler için geliştirilmiş bir standart C kütüphanesidir. ",
         answer: "avr libc"
-    },
-    {
-        question: "\"_____\"ELF formatında çalıştırılabilir program kodu üretir.",
-        answer: "avr-gcc"
     },
     {
         question: "\"_____\"assembly diliyle yazılmış olan programları makine diline (binary/makine kodu) çeviren bir yazılımdır.",
