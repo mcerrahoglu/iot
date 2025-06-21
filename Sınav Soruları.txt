@@ -1,0 +1,443 @@
+1)IOT'yi sürükleyen teknoloji ve piyasa temelleri ile ilgili
+aşağıdakilerden hangisi yanlıştır?
+A) IP temelli ağ bağlantıları egemen küresel standart halini alıyor
+B) Her tarafa yayılan ağ bağlantıları her nesneyi bağlantılı hale getiriyor 
+C) Bilgi teknolojisi ve operasyonel teknolojilerin ayrışması IoT konseptini  <--- Doğru Cevap --->
+mümkün kılıyor.
+D) Moore yasası düşük maliyet ve düşük güç tüketimi ile daha büyük hesaplama
+gücü sağlamaya devam ediyor.
+--------------------------------------------------
+2)Aşağıdakilerden hangisi sensor aygıtlarından alınan verilerin
+büyük veri merkezlerinde işlenmesini ifade eden kavramdır?
+A) Fog Computing
+B) Edge Computing
+C) Cloud Computing <--- Doğru Cevap --->
+D) Real-time Computing
+--------------------------------------------------
+3)Kontrol mekanizmaları karşılaştırıldığında aşağıdakilerden hangisi
+doğrudur?
+A) İleri besleme kontrol, kapalı çevrim kadar reaktiftir.
+B) Geri besleme kontrol, basit tasarıma sahiptir ve daha az bakım gerektirir.
+C) Açık çevrim kontrolün doğruluk ve güvenilirlik hassasiyeti, ileri
+besleme kontrole göre daha yüksektir.
+D) İleri besleme kontrol proaktiftir ve ölçüm değişkenindeki değişiklikleri
+öngörebilme kabiliyetine sahiptir.  <--- Doğru Cevap --->
+--------------------------------------------------
+4)Aşağıdaki modelleme yaklaşımlarından hangisinde 
+veri akış diyagramları kullanılır?
+A) Behavioral Modeling
+B) Functional Modeling <--- Doğru Cevap --->
+C) Structural Modeling
+D) Procedural Modeling
+--------------------------------------------------
+5)Gömülü sistem tasarım tercihlerini etkileyen gerklilikler ile ilgili aşağıdakilerden hangisi yanlıştır?
+A) Düşük güç tüketimi gömülü sistemler için tercih edilen bir özelliktir
+B) Karmaşık kullanıcı arayüzüne sahip sistemlerde mikroişlemciler veya çip üzerinde sistemler tercih edilir 
+C) Az sayıda üretilecek sistemler için özel amaçlı ve sabit donanımlı entegre devreler tercih edilir <--- Doğru Cevap --->
+D) Sistem hafıza gereksinimleri ana işlemci seçimini de etkileyebilir
+--------------------------------------------------
+6)Aşağıdakilerden hangisi bir sistemin artan boyut ve iş yükü durumunda
+bile verimli bir şekilde çalışmaya devam edebilme yeteneğidir?
+A) Scalability <--- Doğru Cevap --->
+B) Availability
+C) Composibility
+D) Reconfigurability
+--------------------------------------------------
+7)Görevler için tanımlı son gerçekleştirme zamanlarının karşılanması
+noktasında en esnek olan gerçek zamanlı sistem tipi aşağıdakilerden
+hangisidir?
+A) Firm real-time
+B) Soft real-time <--- Doğru Cevap --->
+C) Exact real-time
+D) Hard real-time
+--------------------------------------------------
+8)Seçeneklerde IEEE standartları ile temsil edilen kablosuz ağların
+kapsama alanları bakımından büyükten küçüğe doğru sıralanışı aşağıdakilerden
+hangisidir?
+A) 802.20 > 802.16 > 802.11 > 802.15 <--- Doğru Cevap --->
+B) 802.20 > 802.16 > 802.15 > 802.11
+C) 802.11 > 802.15 > 802.16 > 802.20
+D) 802.16 > 802.11 > 802.20 > 802.15
+--------------------------------------------------
+9)"> "sembolünün " üst kümesidir" anlamına geldiğini farzederseniz aşağıdakilerden hangisi doğrudur?
+A) CPS > ECS > IoT
+B) CPS > IoT > ECS   <--- Doğru Cevap --->
+C) IoT > ECS > CPS
+D) ECS > IoT > CPS
+E) IoT > CPS > ECS   
+--------------------------------------------------
+10) Akıllı elektrik şebekeleri, enerji üretim ve dağıtım tesisleri, mikro ve makro
+düzeyde enerji yönetim tesisleri vb. bileşenleri entegre eden büyük ölçekli sistem
+aşağıdaki kavramlardan hangisi ile ifade edilir?
+A) Smart Factory
+B) Smart Higway  
+C) Smart Grid  <--- Doğru Cevap --->
+D) RFID System
+--------------------------------------------------
+11)Aşağıdakilerden hangisi sensor aygıtlarından alınan verilerin ağ uç birimlerinde işlenmesini ifade eden bir kavramdır?
+A) Edge Computing   <--- Doğru Cevap --->
+B) Cloud Computing
+C) Real-time Computing
+D) Fog Computing
+E) Scientific Computing
+--------------------------------------------------
+12)Aşağıdakilerden hangisi bir sistemin, herhangi bir zamanda sistem durum ve davranışını gerek nitel gerekse nicel olarak tahmin edebilme özelliğidir?
+A) Compositionality
+B) Availability
+C) Integrity
+D) Predictability    <--- Doğru Cevap --->
+E) Composability
+--------------------------------------------------
+13)IoT sistemlerde kullanılması muhtemel iki farklı kontrol mekanizması aşağıdakilerden hangisidir?
+A) İleri besleme ve Açık çevrim
+B) Açık çevrim ve kapalı çevrim   
+C) Kapalı çevrim ve ileri besleme  <--- Doğru Cevap ---> 
+D) Kapalı çevrim ve geri besleme    
+E) Geri besleme ve Açık çevrim
+--------------------------------------------------
+14) Aşağıdakilerden hangisi Ardunio devre kartının seri iletişim yolu üzerinden programlanabilmesi
+için kullanılan bir bayrak(flag) değişkenidir?
+A) Setup USB  
+B) Serial Event Run  <--- Doğru Cevap --->
+C) Ardunio Run
+D) Serial Monitor
+--------------------------------------------------
+15)Aşağıdakilerden hangisi geçerli bir sonsuz döngü ifadesi değildir?
+A) do {} while (1):
+B) for (::) {}
+C) for (1) {} <--- Doğru Cevap --->
+D) while (1) {}
+--------------------------------------------------
+16) Ardunio Mega içinde yer alan AVR mikrodenetleyicisi kaç bittir?
+A) 4 BİT
+B) 8 BİT  <--- Doğru Cevap --->
+C) 16 BİT
+D) 32 BİT
+--------------------------------------------------
+17)Aşağıdakilerden hangisi bir fiziksel etki/olguyu analog elektriksel sinyale dönüştüren araçtır?
+A) ADC
+B) Sensor    <--- Doğru Cevap --->
+C) DAC
+D) Actuator
+E) Converter
+--------------------------------------------------
+18)avr-libc çapraz geliştirme sürecinin hangi aşamasında kullanılır?
+A) convert
+B) link     
+C) compile <--- Doğru Cevap --->    
+D) upload
+E) assemble
+--------------------------------------------------
+19) Aşağıdakilerden hangisi IoT kavramına benzer bir konsept değildir?
+A)Virtual Reality  <--- Doğru Cevap --->
+B)Ambient İnteligence
+C)Cyber Physical System
+D)Ubiqultous Computing
+E)System of System
+--------------------------------------------------
+20)Bir aygıt/sistem tarafından çıktı olan ürünün kullanıcının ihtiyaçlarına
+cevap verme noktasında yapması gereken işi doğru yapıp yapmadığını test edilmesi
+hangi kavram ile ifade edilir?
+A) Validation <--- Doğru Cevap --->
+B) Computotion
+C) Verifaction
+D) Simulation
+E) Emulation
+--------------------------------------------------
+21)Aşağıdakilerden hangisi ELF formatındaki program kodunu, AVR mikrodenetleyiciler tarafından çalıştınlacak Intel HEX formatına dönüştüren bir çapraz geliştirme yazılım aracıdır?
+A) avr-as
+B) avr-gcc
+C) avrdude
+D) avr-objcopy      <--- Doğru Cevap --->
+E) avr-bootloader
+--------------------------------------------------
+22)C programı inşasında assemble aşaması sonucu oluşan dosya hangi uzantıya sahiptir?
+A) .exe
+B) .o        <--- Doğru Cevap --->
+C) .c
+D) .s
+E) i
+--------------------------------------------------
+23)Bir aygıt veya sistem tasarımında çıktı olan ürünün tasarım başlangıcında belirlenen teknik özelliklere uyup uymadığının doğrulanması hangi kavram ile ifade edilir? 
+A) Verification  <--- Doğru Cevap --->
+B) Validation 
+C) Simulation 
+D) Emulation 
+E) Computation
+--------------------------------------------------
+24)Aşağıdakilerden hangisi bir sistemin ihtiyaca binaen hızlı ve effektif bir şekilde yeniden yapılandırılabilme özelliğidir? 
+A) Robustness 
+B) Availability 
+C) Reconfigurability  <--- Doğru Cevap --->
+D) Integrity 
+E) Composability
+--------------------------------------------------
+25)Aşağıdakilerden hangisi bir sistemin herhangi bir aksaklık, arıza, hata vb. beklenmedik durumda bile erişime hazır olabilme özelliğidir?
+A) Compositionality
+B) Predictability
+C) Availability   <--- Doğru Cevap --->
+D) Adaptability
+E) Reliability
+--------------------------------------------------
+26)Aşağıdakilerden hangisi bir sistemin ölçülen çıktısının olması gereken çıktıya yakınlığını ifade eder?
+A) Safety
+B) Reconfigurability
+C) Accuracy       <--- Doğru Cevap --->
+D) Availability
+E) Confidentiality
+--------------------------------------------------
++27)Avrdude programı opsiyonlarından hangisi mikrodenetleyici modelini belirtmek için kullanılır?
+A) -m
+B) -b
+C) -U
+D) -c
+E) -p   <--- Doğru Cevap --->
+--------------------------------------------------
+28) AVR mikrodenetleyici yazılım geliştirme sürecinde, kaynak kodunun assembly diline çevrilmesi hangi aşamada yapılır?
+A) Convert
+B) Link
+C) Compile
+D) Upload
+E) Assemble <--- Doğru Cevap --->
+--------------------------------------------------
+29) AVR mikrodenetleyicilerine yazılım yükleme sürecinde hangi aşama kullanılır?
+A) Convert
+B) Link
+C) Compile
+D) Upload <--- Doğru Cevap --->
+E) Assemble
+--------------------------------------------------
+30) AVR mikrodenetleyici geliştirme sürecinde, tüm nesne dosyalarının birleştirilerek tek bir çalıştırılabilir dosya oluşturulması işlemi hangi aşamada yapılır?
+A) Convert
+B) Link <--- Doğru Cevap --->
+C) Compile
+D) Upload
+E) Assemble
+--------------------------------------------------
+31) AVR mikrodenetleyici yazılım geliştirme sürecinde, kaynak kodunun makine diline çevrilmesi işlemi hangi aşamada yapılır?
+A) Convert
+B) Link
+C) Compile <--- Doğru Cevap --->
+D) Upload
+E) Assemble
+--------------------------------------------------
+32)Aşağıdakilerden hangisi, karmaşık hesaplamalar, matematiksel modelleme ve simülasyonlar için yüksek performanslı hesaplama kaynaklarını kullanan bir kavramdır?
+A) Fog Computing
+B) Edge Computing
+C) Cloud Computing
+D) Scientific Computing <--- Doğru Cevap --->
+E) Real-time Computing
+--------------------------------------------------
+33)Aşağıdakilerden hangisi, veri işleme ve analizinin hem uç cihazlarda hem de ağın merkezi bölgelerinde, yani uç birimler ile bulut arasında bir katman kullanılarak gerçekleştirildiği bir kavramdır?
+A) Edge Computing
+B) Cloud Computing
+C) Real-time Computing
+D) Fog Computing <--- Doğru Cevap --->
+E) Scientific Computing
+--------------------------------------------------
+34)Aşağıdaki modelleme yaklaşımlarından hangisi algoritmaların adım adım yürütülmesini ve işlemlerin sırasını tanımlamak amacıyla kullanılır?
+A) Functional Modeling
+B) Structural Modeling
+C) Behavioral Modeling
+D) Procedural Modeling <--- Doğru Cevap --->
+--------------------------------------------------
+35)Aşağıdaki modelleme yaklaşımlarından hangisi sistemin bileşenlerini, sınıflarını ve bunlar arasındaki ilişkileri tanımlamak için kullanılır?
+A) Behavioral Modeling
+B) Functional Modeling
+C) Structural Modeling <--- Doğru Cevap --->
+D) Procedural Modeling
+--------------------------------------------------
+36)Aşağıdaki modelleme yaklaşımlarından hangisinde durum diyagramları kullanılır? 
+A) Structural Modeling 
+B) Functional Modeling 
+C) Behavioral Modeling   <--- Doğru Cevap --->
+D) Procedural Modeling
+--------------------------------------------------
+37)Aşağıdakilerden hangisi IoT kavramına benzer bir konsept değildir?
+A)Virtual Reality  <--- Doğru Cevap --->
+B)Ambient İnteligence
+C)Cyber Physical System
+D)Ubiqultous Computing
+E)System of System
+--------------------------------------------------
+39)Aşağıdakilerden hangisi C diliyle yazılmış kaynak kodları AVR mikrodenetleyiciler için makine diline çevirerek derleyen bir çapraz geliştirme yazılım aracıdır?
+A) avr-bootloader
+B) avr-objcopy
+C) avrdude
+D) avr-gcc <--- Doğru Cevap --->
+E) avr-as
+--------------------------------------------------
+40) Aşağıdakilerden hangisi AVR mikrodenetleyicilerde, programın bilgisayardan doğrudan mikrodenetleyiciye yüklenmesini sağlayan ve yazılım güncellemelerini kolaylaştıran bir başlatıcı programıdır?
+A) avr-gcc
+B) avr-as
+C) avrdude
+D) avr-objcopy
+E) avr-bootloader <--- Doğru Cevap --->
+--------------------------------------------------
+41)Aşağıdakilerden hangisi AVR mikrodenetleyiciler için oluşturulmuş HEX formatındaki program kodunu mikrodenetleyicinin Flash hafızasına aktarmak için kullanılan bir çapraz geliştirme yazılım aracıdır?
+A) avr-as
+B) avr-gcc
+C) avrdude    <--- Doğru Cevap --->
+D) avr-objcopy      
+E) avr-bootloader
+--------------------------------------------------
+42) Görevin zamanında tamamlanması durumunda maksimum fayda sağladığı, ancak gecikme durumunda sistemin tamamen zarar gördüğü sistem tipi aşağıdakilerden hangisidir?
+A) Hard real-time <--- Doğru Cevap --->
+B) Soft real-time
+C) Firm real-time
+D) Exact real-time
+--------------------------------------------------
+43)Gerçek zamanlı sistemlerde, son gerçekleştirme zamanının nadiren kaçırılmasının kabul edilebilir olduğu ancak görevin değersiz sayılmadığı sistem tipi aşağıdakilerden hangisidir?
+A) Soft real-time
+B) Firm real-time <--- Doğru Cevap --->
+C) Exact real-time
+D) Hard real-time
+--------------------------------------------------
+44) Aşağıdakilerden hangisi bir analog elektriksel sinyali dijital elektriksel sinyale dönüştüren araçtır? 
+A) Sensor 
+B) Actuator 
+C) ADC   <--- Doğru Cevap --->
+D) DAC 
+E) Transducer
+--------------------------------------------------
+45)Üzerinde çalıştığı makine için değil de başka bir makine için kod derleyen tercüman yazılıma ne ad verilir?
+A) Interpreter
+B) Compiler
+C) JIT Compiler
+D) Assembler
+E) Cross Compiler   <--- Doğru Cevap --->
+--------------------------------------------------
+46)Derste uygulamasını gerçekleştirdiğimiz Arduino Web Server için oluşturulan C++ program koduna Arduino.h ile beraber hangı başlık dosyalarının eklenmesi gerekir?
+A) SPL.h ve PN532.h
+B) USB.h ve Ethernet.h   
+C) USB.h ve Wi-Fi.h
+D) SPh ve Wi-Fi.h
+E) SPh ve Ethernet.h  <--- Doğru Cevap --->
+--------------------------------------------------
+47)Avrdude ile Arduino board arasındaki seri iletişim hızı hangi opsiyon ile belirtilir?
+A) -b   <--- Doğru Cevap --->
+B) -v
+C) -P
+D) -U
+E) -C
+--------------------------------------------------
+48)Endüstri 4.0 kavramı aşağıdakilerden hangisini ifade etmek için kullanılır?
+A) Gelecek Nesil Üretim Sistemleri <--- Doğru Cevap --->
+B) Gelecek Nesil Güvenlik Sistemleri
+C) Gelecek Nesil Taşımacılık Sistemleri
+D) Gelecek Nesil Acil Durum Yönetim Sistemleri
+--------------------------------------------------
+49)Aşağıdakilerden hangisi gömülü sistemlerin en temel bileşenleri arasında yer almaz?
+A) ADC
+B) CPU
+C) Monitor <--- Doğru Cevap --->
+D) Memory
+--------------------------------------------------
+50)Aşağıdaki hafıza tiplerinden hangisi Arduino devre kartlarında yaygın olarak program hafızası
+için tercih edilir?
+A) DRAM
+B) Flash  <--- Doğru Cevap --->
+C) SRAM
+D) EEPROM
+--------------------------------------------------
+51)"< "sembolünün " alt kümesidir" anlamına geldiğini farzederseniz aşağıdakilerden hangisi doğrudur?
+A) CPS > ECS > IoT
+B) CPS > IoT > ECS   
+C) IoT > ECS > CPS
+D) ECS > IoT > CPS <--- Doğru Cevap --->
+E) IoT > CPS > ECS   
+--------------------------------------------------
+Boşluk Doldurma
+Sensor - ADC - DAC - Actuator - Transducer - Converter - Port - SPI - Digital Write - DDR - Pin Mode - Cross Compiler - Bootloader - avr-objcopy - avrdude - obj-converter - interpreter - avr libc - assembler - native compiler 
+
+1) " ADC " bir analog elektriksel sinyali dijital elektriksel sinyale dönüştüren araçtır?
+2) " Actuator " bir analog elektriksel sinyali fiziksel etki/eyleme dönüştüren araçtır?
+3) " Transducer " bir enerji formundan başka bir enerji formuna dönüşüm yapan araçları ifade eder?
+4) " Sensor "  bir fiziksel etki/olguyu analog elektriksel sinyale dönüştüren araçtır
+5) " DAC "  bir dijital sinyali analog sinyale çeviren araçtır
+6) " Converter " dijital sinyali analog sinyale, analog sinyali dijital sinyale dönüştürür
+7) " PORT "  AVR programlama mantığı ile giriş /çıkış yönü atanmış bir pine değer atamak için kullanılır. 
+8) " SPI " Arduino Mega üzerine yerleşen devre kartı. (shield) ile Arduino Maga devre kartı arasındaki bağlantıyı sağlamak için kullanılır
+9) " Digital Write " Arduino programlama mantığı ile giriş /çıkış yönü atanmış bir pine deger atamak için kullanılır. 
+10) " DDR " AVR programlama mantığı ile bir pine giriş/çıkış yönü atamak için kullanılır.
+11) " Pin Mode " Arduino programlama mantığı ile bir pine giriş /çılış yönü atamak için kullanılır.
+12) " Cross Compiler " Üzerinde çalıştığı makine için değil de başka bir makine için kod derleyen tercüman yazılıma denir.
+13) " Bootloader " AVR mikrodenetleyicilerin Flash hafızasına yüklenmiş program kodunun başlatılması için kullanılır.
+14) " avr-objcopy " ELF formatındaki program kodunu, AVR mikrodenetleyiciler tarafından çalıştırılacak Intel HEX formatına dönüştürmek için kullanılır.
+15) " avrdude " .hex uzantılı çalıştırılabilir program kodunu mikrodenetleyicinin Flash hafızasına transfer ekmek için kullanılan açık kaynak bir çapraz geliştirme yazılımıdır.
+17) " interpreter " Kodu derlemek yerine satır satır çalıştıran yapıdır.
+18) " avr libc " AVR mikrodenetleyiciler için geliştirilmiş bir standart C kütüphanesidir. 
+20) " Assembler " assembly diliyle yazılmış olan programları makine diline (binary/makine kodu) çeviren bir yazılımdır.
+21) " Native Compiler"  bir programlama dilinde yazılmış kaynak kodu, aynı sistem mimarisi (işlemci türü ve işletim sistemi) için doğrudan çalıştırılabilir makine koduna çeviren derleyicidir.
+--------------------------------------------------
+Sözel 1)
+Çapraz geliştirme sürecinde AVR programlama yaklaşımıyla main.c adlı kaynak kodundan kod boyutu optimizasyonu yaparak sadece object code elde etmek için gerekli komutu yazınız?
+
+Cevap:
+avr-gcc -Os -c main.c -o main.o
+
+Sözel 2)
+object adı dizinde yer alan .o uzantılı makine kodlarından, library adlı dizinde libfun.a adlı static kütüphaneyi oluşturabilmek için gerekli komutu yazınız?
+
+Cevap:
+ar -crs ./library/libfun.a ./object/*.o
+
+Sözel 3)
+object adlı dizinde yer alan .o uzantılı makine kodlarından, library adlı dizinde libfun.so adlı bir dinamik (shared) kütüphane oluşturmak için gerekli komut nedir?
+
+Cevap:
+gcc -shared -o ./library/libfun.so ./object/*.o
+
+Sözel 4)
+Arduino programlama yaklaşımında digitalWrite(LED_BUILTIN, HIGH) ve digitalWrite(LED_BUILTIN, LOW) ile gerçekleştirilen işlemlerin AVR programlama yak-laşımındaki karşılığını yazınız?
+
+Cevap:
+led_port |=(1<<led_builtin)//high
+led port &=~(1<<led_builtin)//low
+
+Sözel 5)
+Seri iletişim yolu nasıl başlatılır? ilgilş kodu yazınız ve şu stringi yazdırınız?
+
+Cevap:
+Serial.begin(115200); // 115200 baud rate değeri soruda ne verirse o yazılır
+Serial.print("Seri iletişim başlatıldı") // buradaki yazı da ne istiyorsa o yazılır
+
+Sözel 6)
+Seri iletişimin aktif olup olmadığını kontrol eden kodu yazınız?
+
+Cevap:
+if(serial.available())
+{
+switch(serial.read());;
+{}
+}
+
+Sözel 7)
+Atmega link komutu
+
+Cevap:
+$avr-gcc -g -mmcu=atmega328p -o led.elf led.o
+
+Sözel 8)
+Object içindeki .o dosyasını ve libcore.a kütüphanesini birleştirerek atmega2560 için çalıştıracak elf dosyasını
+üreten kodu yazınız.
+
+Cevap:
+avr -g++ object/* -mmcu=atmega2560 -L library/- lcore -o binary /main.elf
+--------------------------------------------------
+Bilgi 1)
+C, C++ kod geliştirme aşamaları:
+1) Preprocess
+2) Compiler
+3) Assembler
+4) Link
+
+Bilgi 2)
+Kablosuz ağ bağlantılarının kapsama alanı sırası:
+RFID < NFC < Bluetooth < Wi-Fi
+
+Bilgi 3)
+Hangisi arduinoda program sürecini başlatmak için kullanılan fonksiyondur diyorsa cevap init() 
+
+Bilgi 4)
+Tek seferde çalıştırılacak kodlar setup()
